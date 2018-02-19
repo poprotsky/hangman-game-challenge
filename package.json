@@ -1,0 +1,21 @@
+{
+  "name": "hangman-challenge",
+  "version": "1.0.0",
+  "description": "Template package for Hangman challenge",
+  "main": "server.js",
+  "scripts": {
+    "start": "env NUM_WORDS=1 nodemon",
+    "multi": "env NUM_WORDS=5 nodemon"
+  },
+  "author": "Grzegorz Michlicki <gmichlicki@n-educatio.pl>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.2",
+    "express-dot-engine": "^1.0.7",
+    "portfinder": "^1.0.13"
+  },
+  "devDependencies": {
+    "cross-env": "^5.1.3",
+    "nodemon": "^1.14.12"
+  }
+}

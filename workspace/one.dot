@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <title>Hangman challenge</title>
+  <style>
+    .good { color: green; }
+    .bad { color: red; }
+
+    {{~it.lettersInWord :letter}}
+    .letter-{{=letter}} { color: green; }
+    {{~}}
+
+    {{~it.lettersNotInWord :letter}}
+    .letter-{{=letter}} { color: red; }
+    {{~}}
+  </style>
+</head>
+<body>
+  <div>
+    <p>Alphabet:
+      {{~it.alphabet :letter:letterIndex}}
+      <span class="letter-{{=letter}}">{{=letter}}</span>
+      {{~}}
+    </p>
+    <p>Alphabet:
+      {{~it.alphabet :letter:letterIndex}}
+      <span class="{{?it.lettersInWord.includes(letter)}}good{{??}}bad{{?}}">{{=letter}}</span>
+      {{~}}
+    </p>
+
+    <p>Number of words: {{=it.numWords}}</p>
+
+    <p>Word <span>{{=it.word}}</span><p>
+    <p>Number of letters: {{=it.numberOfLetters}}</p>
+    <p>Letter by letter in word:
+    {{~it.word :letter:letterIndex}}
+      <span>{{=letter}}{{?letterIndex < it.numberOfLetters - 1}},{{?}} </span>
+    {{~}}
+    </p>
+    <p>Number of unique letters used in word: {{=it.numberOfLettersInWord}}</p>
+    <p>Unique letters used in word:
+    {{~it.lettersInWord :letter:letterIndex}}
+      <span>{{=letter}}{{?letterIndex < it.numberOfLettersInWord - 1}},{{?}} </span>
+    {{~}}
+    </p>
+    <p>Number of letters not used in word: {{=it.numberOfLettersNotInWord}}</p>
+    <p>Letters not used in word:
+    {{~it.lettersNotInWord :letter:letterIndex}}
+      <span>{{=letter}}{{?letterIndex < it.numberOfLettersNotInWord - 1}},{{?}}</span>
+    {{~}}
+    </p>
+  </div>
+</body>
+</html>

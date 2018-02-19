@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <title>Hangman challenge</title>
+</head>
+<body>
+  <div>
+    <p>Alphabet:
+      {{~it.alphabet :letter:letterIndex}}
+      <span class="letter-{{=letter}}">{{=letter}}</span>
+      {{~}}
+    </p>
+
+    <p>Number of words: {{=it.numWords}}</p>
+
+    <p>Words:</p>
+    <ul>
+    {{~it.words :data:index}}
+      <li>
+        <p>Word {{=index+1}} <span>{{=data.word}}</span><p>
+        <p>Number of letters: {{=data.numberOfLetters}}</p>
+        <p>Letter by letter in word:
+        {{~data.word :letter:letterIndex}}
+          <span>{{=letter}}{{?letterIndex < data.numberOfLetters - 1}},{{?}} </span>
+        {{~}}
+        </p>
+        <p>Number of unique letters used in word: {{=data.numberOfLettersInWord}}</p>
+        <p>Unique letters used in word:
+        {{~data.lettersInWord :letter:letterIndex}}
+          <span>{{=letter}}{{?letterIndex < data.numberOfLettersInWord - 1}},{{?}} </span>
+        {{~}}
+        </p>
+        <p>Number of letters not used in word: {{=data.numberOfLettersNotInWord}}</p>
+        <p>Letters not used in word:
+        {{~data.lettersNotInWord :letter:letterIndex}}
+          <span>{{=letter}}{{?letterIndex < data.numberOfLettersNotInWord - 1}},{{?}}</span>
+        {{~}}
+        </p>
+      </li>
+    {{~}}
+    </ul>
+  </div>
+  <div>
+  <p>{{=it.words[0].word}}</p>
+  <p>{{=it.words[1].word}}</p>
+  <p>{{=it.words[2].word}}</p>
+  <p>{{=it.words[3].word}}</p>
+  <p>{{=it.words[4].word}}</p>
+  </div>
+</body>
+</html>
