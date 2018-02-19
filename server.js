@@ -43,7 +43,7 @@ app.get('/', (req, res) => {
     DATA = Object.assign(DATA, getWordStats(wordList[0]));
   }
 
-  res.render(numWords > 1 ? 'solution' : 'one', DATA);
+  res.render(numWords > 1 ? 'multi' : 'one', DATA);
 });
 
 app.use((req, res) => res.status(404).send('Not found'));
