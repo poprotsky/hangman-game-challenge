@@ -1,4 +1,4 @@
-#Installation
+# Installation
 
 Install node.js: https://nodejs.org/en/
 
@@ -18,7 +18,7 @@ Multi-stage development
 
     npm run multi
 
-#Documentation    
+# Documentation    
 
 DoT template engine documentation: http://olado.github.io/doT/index.html
 
