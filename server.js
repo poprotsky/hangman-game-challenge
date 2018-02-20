@@ -33,17 +33,17 @@ app.get('/favicon.ico', (req, res) => res.status(204).send());
 
 app.get('/', (req, res) => {
   const wordList = shuffle(wordsArray.slice(0));
-  const numWords = Math.min(parseInt(process.env.NUM_WORDS), wordList.length);
+  const numberOfWords = Math.min(parseInt(process.env.NUM_WORDS), wordList.length);
 
-  let DATA = { alphabet, numWords };
+  let DATA = { alphabet, numberOfWords };
 
-  if (numWords > 1) {
-    DATA.words = wordList.splice(0, numWords).map(getWordStats);
+  if (numberOfWords > 1) {
+    DATA.words = wordList.splice(0, numberOfWords).map(getWordStats);
   } else {
     DATA = Object.assign(DATA, getWordStats(wordList[0]));
   }
 
-  res.render(numWords > 1 ? 'multi' : 'one', DATA);
+  res.render(numberOfWords > 1 ? 'multi' : 'one', DATA);
 });
 
 app.use((req, res) => res.status(404).send('Not found'));
@@ -68,7 +68,6 @@ function getWordStats(word) {
 
   return {
     word,
-    letters,
     numberOfLetters: letters.length,
     lettersInWord,
     numberOfLettersInWord: lettersInWord.length,
