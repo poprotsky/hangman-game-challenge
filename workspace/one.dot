@@ -6,20 +6,68 @@
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <title>Hangman challenge</title>
   <style>
+    h1 span { display: none; }
     .good { color: green; }
     .bad { color: red; }
 
+    .letter {
+      display: inline-block;
+      width: 30px;
+      opacity: 0;
+    }
+
     {{~it.lettersInWord :letter}}
-    .letter-{{=letter}} { color: green; }
+      .letter-{{=letter}} { color: green; }
+
+      .checkbox.letter-{{=letter}}:checked ~ .letter.letter-{{=letter}} {
+        opacity: 1;
+      }
+
+      .checkbox.letter-{{=letter}}:checked ~ * .label.label-{{=letter}} {
+        pointer-events: none;
+      }
     {{~}}
 
     {{~it.lettersNotInWord :letter}}
     .letter-{{=letter}} { color: red; }
     {{~}}
   </style>
+  <link rel="stylesheet" href="./styles-less.css"/>
+  <link rel="stylesheet" href="./styles-scss.css"/>
 </head>
 <body>
+
+  <!-- hidden checkboxes -->
+  {{~it.lettersInWord :letter:letterIndex}}
+    <input type="checkbox" id="letter-{{=letter}}" class="checkbox letter-{{=letter}}">
+    <span>{{=letter}}</span>
+  {{~}}
+
+
+  <br><br><br>
+  <!-- WORD -->
+  {{~it.word :letter:letterIndex}}
+      <span class="letter letter-{{=letter}}">{{=letter}}</span>
+  {{~}}
+
+  <br><br><br>
+  <!-- keyboard -->
   <div>
+    {{~it.alphabet :letter:letterIndex}}
+      <label for="letter-{{=letter}}" class="label label-{{=letter}} {{?it.lettersInWord.includes(letter)}}good{{??}}bad{{?}}">{{=letter}}</label>
+    {{~}}
+  </div>
+
+  <br>
+  <br>
+  <br>
+  <br>
+  
+  <div>
+    <h1>
+      <span class="less">LESS is working</span><br/>
+      <span class="scss">SCSS is working</span><br/>
+    </h1>
     <p>Alphabet:
       {{~it.alphabet :letter:letterIndex}}
       <span class="letter-{{=letter}}">{{=letter}}</span>

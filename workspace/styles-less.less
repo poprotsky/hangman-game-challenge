@@ -1,0 +1,26 @@
+@import "_vars.less";
+
+@COLOR: green;
+
+h1 {
+  span {
+    &.less {
+      display: inline;
+      color: @COLOR;
+    }
+  }
+}
+
+.generateColors(@letters; @color; @index: 1) when (@index <= length(@letters)) {
+
+  @letter: extract(@letters, @index);
+  .letter-@{letter} {
+    background-color: @color;
+  }
+
+  // Do next loop
+  .generateColors(@letters; @color; @index+1);
+}
+
+.generateColors(@lettersInWord; #eee);
+.generateColors(@lettersNotInWord; #111);

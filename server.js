@@ -1,7 +1,10 @@
+const fs = require('fs');
 const path = require('path');
 const portFinder = require('portfinder');
 const express = require('express');
 const engine = require('express-dot-engine');
+const lessMiddleware = require('less-middleware');
+const scssMiddleware = require('node-sass-middleware');
 const { words: wordsArray, alphabet } = require('./workspace/data');
 
 const PORT = +process.env.PORT || 3000;
@@ -27,6 +30,8 @@ app.engine('dot', engine.__express);
 app.set('views', WORKSPACE);
 app.set('view engine', 'dot');
 
+app.use(lessMiddleware(WORKSPACE, { force: true, render: { compress: false } }));
+app.use(scssMiddleware({ src: WORKSPACE }));
 app.use(express.static(WORKSPACE));
 
 app.get('/favicon.ico', (req, res) => res.status(204).send());
@@ -36,15 +41,26 @@ app.get('/', (req, res) => {
   const numberOfWords = Math.min(parseInt(process.env.NUM_WORDS), wordList.length);
 
   let DATA = { alphabet, numberOfWords };
+  let lessVars, scssVars;
 
   if (numberOfWords > 1) {
-    DATA.words = wordList.splice(0, numberOfWords).map(getWordStats);
+    lessVars = prepare(DATA, prepareForLess) + '\n';
+    scssVars = prepare(DATA, prepareForScss) + '\n';
+    const words = DATA.words = wordList.splice(0, numberOfWords).map(getWordStats);
+    lessVars += words.map((data, index) => prepare(data, prepareForLess, index + 1)).join('\n');
+    scssVars += words.map((data, index) => prepare(data, prepareForScss, index + 1)).join('\n');
   } else {
     DATA = Object.assign(DATA, getWordStats(wordList[0]));
+    lessVars = prepare(DATA, prepareForLess);
+    scssVars = prepare(DATA, prepareForScss);
   }
+
+  fs.writeFileSync(`${WORKSPACE}/_vars.less`, lessVars);
+  fs.writeFileSync(`${WORKSPACE}/_vars.scss`, scssVars);
 
   res.render(numberOfWords > 1 ? 'multi' : 'one', DATA);
 });
+
 
 app.use((req, res) => res.status(404).send('Not found'));
 
@@ -57,8 +73,30 @@ portFinder.basePort = PORT;
 
 portFinder.getPortPromise()
     .then(port =>
-        app.listen(port, HOST, () => console.log(`App is running at: http://${HOST}:${port}/`))
+        app.listen(port, HOST, () =>
+            console.log(`App is running at: http://${HOST}:${port}/`)
+        )
     );
+
+function prepare(data, callback, index) {
+  return Object.keys(data)
+      .map(key => callback(key, data[key], index))
+      .join('\n');
+}
+
+function prepareForLess(key, value, index) {
+  const str = value instanceof Array
+      ? value.map(val => `~'${val}'`).join(', ')
+      : typeof value === 'string' ? `~'${value}'` : value;
+  return `@${key + (index || '')}: ${str};`;
+}
+
+function prepareForScss(key, value, index) {
+  const str = value instanceof Array
+      ? value.map(val => `'${val}'`).join(', ')
+      : typeof value === 'string' ? `'${value}'` : value;
+  return `$${key + (index || '')}: ${str};`;
+}
 
 function getWordStats(word) {
   const letters = word.split('');
@@ -68,6 +106,7 @@ function getWordStats(word) {
 
   return {
     word,
+    letters,
     numberOfLetters: letters.length,
     lettersInWord,
     numberOfLettersInWord: lettersInWord.length,

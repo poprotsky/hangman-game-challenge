@@ -1,0 +1,100 @@
+@charset "UTF-8";
+h1 span.scss {
+  display: inline;
+  color: green; }
+
+.letter-A {
+  font-weight: bold; }
+
+.letter-K {
+  font-weight: bold; }
+
+.letter-O {
+  font-weight: bold; }
+
+.letter-P {
+  font-weight: bold; }
+
+.letter-R {
+  font-weight: bold; }
+
+.letter-T {
+  font-weight: bold; }
+
+.letter-U {
+  font-weight: bold; }
+
+.letter-W {
+  font-weight: bold; }
+
+.letter-Ą {
+  font-style: italic; }
+
+.letter-B {
+  font-style: italic; }
+
+.letter-C {
+  font-style: italic; }
+
+.letter-Ć {
+  font-style: italic; }
+
+.letter-D {
+  font-style: italic; }
+
+.letter-E {
+  font-style: italic; }
+
+.letter-Ę {
+  font-style: italic; }
+
+.letter-F {
+  font-style: italic; }
+
+.letter-G {
+  font-style: italic; }
+
+.letter-H {
+  font-style: italic; }
+
+.letter-I {
+  font-style: italic; }
+
+.letter-J {
+  font-style: italic; }
+
+.letter-L {
+  font-style: italic; }
+
+.letter-Ł {
+  font-style: italic; }
+
+.letter-M {
+  font-style: italic; }
+
+.letter-N {
+  font-style: italic; }
+
+.letter-Ń {
+  font-style: italic; }
+
+.letter-Ó {
+  font-style: italic; }
+
+.letter-S {
+  font-style: italic; }
+
+.letter-Ś {
+  font-style: italic; }
+
+.letter-Y {
+  font-style: italic; }
+
+.letter-Z {
+  font-style: italic; }
+
+.letter-Ź {
+  font-style: italic; }
+
+.letter-Ż {
+  font-style: italic; }

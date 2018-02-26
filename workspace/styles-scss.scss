@@ -1,0 +1,24 @@
+@import "vars";
+
+$COLOR: green;
+
+h1 {
+  span {
+    &.scss {
+      display: inline;
+      color: $COLOR;
+    }
+  }
+}
+
+@each $letter in $lettersInWord {
+  .letter-#{$letter} {
+    font-weight: bold;
+  }
+}
+
+@each $letter in $lettersNotInWord {
+  .letter-#{$letter} {
+    font-style: italic;
+  }
+}
