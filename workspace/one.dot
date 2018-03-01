@@ -6,16 +6,6 @@
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <title>Hangman challenge</title>
   <style>
-    h1 span { display: none; }
-    .good { color: green; }
-    .bad { color: red; }
-
-    .letter {
-      display: inline-block;
-      width: 30px;
-      opacity: 0;
-    }
-
     {{~it.lettersInWord :letter}}
       .letter-{{=letter}} { color: green; }
 
@@ -29,30 +19,77 @@
     {{~}}
 
     {{~it.lettersNotInWord :letter}}
-    .letter-{{=letter}} { color: red; }
+      .letter-{{=letter}} { color: red; }
+
+      .checkbox.letter-{{=letter}}:checked ~ .letter.letter-{{=letter}} {
+        opacity: 1;
+      }
+
+      .checkbox.letter-{{=letter}}:checked ~ * .label.label-{{=letter}} {
+        pointer-events: none;
+      }
     {{~}}
   </style>
   <link rel="stylesheet" href="./styles-less.css"/>
   <link rel="stylesheet" href="./styles-scss.css"/>
 </head>
 <body>
-
-  <!-- hidden checkboxes -->
+  <h2>Used letters</h2>
+  <!-- hidden checkboxes - good letters -->
   {{~it.lettersInWord :letter:letterIndex}}
-    <input type="checkbox" id="letter-{{=letter}}" class="checkbox letter-{{=letter}}">
+    <input type="checkbox" id="letter-{{=letter}}" class="checkbox letter-{{=letter}} {{?it.lettersInWord.includes(letter)}}good{{??}}bad{{?}}">
     <span>{{=letter}}</span>
   {{~}}
 
 
   <br><br><br>
   <!-- WORD -->
+  <h2>Word</h2>
   {{~it.word :letter:letterIndex}}
       <span class="letter letter-{{=letter}}">{{=letter}}</span>
   {{~}}
 
+
+
+  <br><br><br>
+  <!-- hidden checkboxes - bad letters -->
+  <h2>Not used letters</h2>
+  {{~it.lettersNotInWord :letter:letterIndex}}
+    <input type="checkbox" id="letter-{{=letter}}" class="checkbox letter-{{=letter}} {{?it.lettersInWord.includes(letter)}}good{{??}}bad{{?}}">
+    <span>{{=letter}}</span>
+  {{~}}
+
+  <br><br><br>
+  <!-- hangman -->
+  <h2>Hangman</h2>
+  <div class="hangman">
+    <span class="hangman-part-1">
+      <span>1</span>
+    </span>
+    <span class="hangman-part-2">
+      <span>2</span>
+    </span>
+    <span class="hangman-part-3">
+      <span>3</span>
+    </span>
+    <span class="hangman-part-4">
+      <span>4</span>
+    </span>
+    <span class="hangman-part-5">
+      <span>5</span>
+    </span>
+    <span class="hangman-part-6">
+      <span>6</span>
+    </span>
+  </div>
+
+
+
+
   <br><br><br>
   <!-- keyboard -->
-  <div>
+  <h2>Keyboard</h2>
+  <div class="keyboard">
     {{~it.alphabet :letter:letterIndex}}
       <label for="letter-{{=letter}}" class="label label-{{=letter}} {{?it.lettersInWord.includes(letter)}}good{{??}}bad{{?}}">{{=letter}}</label>
     {{~}}
@@ -62,7 +99,12 @@
   <br>
   <br>
   <br>
-  
+
+  <div class="modal">
+    <p>Modal test</p>
+    <a href="./">restart</a>
+  </div>
+
   <div>
     <h1>
       <span class="less">LESS is working</span><br/>

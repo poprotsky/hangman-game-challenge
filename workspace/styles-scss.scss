@@ -1,3 +1,5 @@
+// DEFAULT
+
 @import "vars";
 
 $COLOR: green;
@@ -21,4 +23,82 @@ h1 {
   .letter-#{$letter} {
     font-style: italic;
   }
+}
+
+// CUSTOM
+
+h1 span { display: none; }
+
+.good { color: green; }
+.bad { color: red; }
+
+.letter {
+  display: inline-block;
+  width: 30px;
+  opacity: 0;
+}
+.hangman {
+  outline: 1px solid green;
+}
+.hangman > * {
+  display: none;
+}
+
+.checkbox.bad:checked {
+  $this: checkbox;
+  ~ .hangman {
+    .hangman-part-1 {
+      display: block;
+    }
+  }
+  ~ .#{$this}.bad:checked {
+    ~ .hangman {
+      .hangman-part-2 {
+        display: block;
+      }
+    }
+    ~ .#{$this}.bad:checked {
+      ~ .hangman {
+        .hangman-part-3 {
+          display: block;
+        }
+      }
+      ~ .#{$this}.bad:checked {
+        ~ .hangman {
+          .hangman-part-4 {
+            display: block;
+          }
+        }
+        ~ .#{$this}.bad:checked {
+          ~ .hangman {
+            .hangman-part-5 {
+              display: block;
+            }
+          }
+          ~ .#{$this}.bad:checked {
+            ~ .hangman {
+              .hangman-part-6 {
+                display: block;
+              }
+            }
+            ~ .keyboard {
+              .label {
+                pointer-events: none;
+              }
+            }
+            ~ .modal {
+              display: block;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.modal {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: none;
 }

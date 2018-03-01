@@ -2,46 +2,40 @@ h1 span.less {
   display: inline;
   color: green;
 }
-.letter-A {
+.letter-B {
   background-color: #eee;
 }
-.letter-K {
+.letter-C {
   background-color: #eee;
 }
-.letter-O {
+.letter-E {
   background-color: #eee;
 }
-.letter-P {
+.letter-N {
   background-color: #eee;
 }
 .letter-R {
   background-color: #eee;
 }
-.letter-T {
+.letter-S {
   background-color: #eee;
 }
-.letter-U {
+.letter-Y {
   background-color: #eee;
 }
-.letter-W {
+.letter-Z {
   background-color: #eee;
+}
+.letter-A {
+  background-color: #111;
 }
 .letter-Ą {
-  background-color: #111;
-}
-.letter-B {
-  background-color: #111;
-}
-.letter-C {
   background-color: #111;
 }
 .letter-Ć {
   background-color: #111;
 }
 .letter-D {
-  background-color: #111;
-}
-.letter-E {
   background-color: #111;
 }
 .letter-Ę {
@@ -62,6 +56,9 @@ h1 span.less {
 .letter-J {
   background-color: #111;
 }
+.letter-K {
+  background-color: #111;
+}
 .letter-L {
   background-color: #111;
 }
@@ -71,25 +68,28 @@ h1 span.less {
 .letter-M {
   background-color: #111;
 }
-.letter-N {
+.letter-Ń {
   background-color: #111;
 }
-.letter-Ń {
+.letter-O {
   background-color: #111;
 }
 .letter-Ó {
   background-color: #111;
 }
-.letter-S {
+.letter-P {
   background-color: #111;
 }
 .letter-Ś {
   background-color: #111;
 }
-.letter-Y {
+.letter-T {
   background-color: #111;
 }
-.letter-Z {
+.letter-U {
+  background-color: #111;
+}
+.letter-W {
   background-color: #111;
 }
 .letter-Ź {

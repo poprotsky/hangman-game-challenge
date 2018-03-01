@@ -3,46 +3,40 @@ h1 span.scss {
   display: inline;
   color: green; }
 
-.letter-A {
+.letter-B {
   font-weight: bold; }
 
-.letter-K {
+.letter-C {
   font-weight: bold; }
 
-.letter-O {
+.letter-E {
   font-weight: bold; }
 
-.letter-P {
+.letter-N {
   font-weight: bold; }
 
 .letter-R {
   font-weight: bold; }
 
-.letter-T {
+.letter-S {
   font-weight: bold; }
 
-.letter-U {
+.letter-Y {
   font-weight: bold; }
 
-.letter-W {
+.letter-Z {
   font-weight: bold; }
+
+.letter-A {
+  font-style: italic; }
 
 .letter-Ą {
-  font-style: italic; }
-
-.letter-B {
-  font-style: italic; }
-
-.letter-C {
   font-style: italic; }
 
 .letter-Ć {
   font-style: italic; }
 
 .letter-D {
-  font-style: italic; }
-
-.letter-E {
   font-style: italic; }
 
 .letter-Ę {
@@ -63,6 +57,9 @@ h1 span.scss {
 .letter-J {
   font-style: italic; }
 
+.letter-K {
+  font-style: italic; }
+
 .letter-L {
   font-style: italic; }
 
@@ -72,25 +69,28 @@ h1 span.scss {
 .letter-M {
   font-style: italic; }
 
-.letter-N {
+.letter-Ń {
   font-style: italic; }
 
-.letter-Ń {
+.letter-O {
   font-style: italic; }
 
 .letter-Ó {
   font-style: italic; }
 
-.letter-S {
+.letter-P {
   font-style: italic; }
 
 .letter-Ś {
   font-style: italic; }
 
-.letter-Y {
+.letter-T {
   font-style: italic; }
 
-.letter-Z {
+.letter-U {
+  font-style: italic; }
+
+.letter-W {
   font-style: italic; }
 
 .letter-Ź {
@@ -98,3 +98,53 @@ h1 span.scss {
 
 .letter-Ż {
   font-style: italic; }
+
+h1 span {
+  display: none; }
+
+.good {
+  color: green; }
+
+.bad {
+  color: red; }
+
+.letter {
+  display: inline-block;
+  width: 30px;
+  opacity: 0; }
+
+.hangman {
+  outline: 1px solid green; }
+
+.hangman > * {
+  display: none; }
+
+.checkbox.bad:checked ~ .hangman .hangman-part-1 {
+  display: block; }
+
+.checkbox.bad:checked ~ .checkbox.bad:checked ~ .hangman .hangman-part-2 {
+  display: block; }
+
+.checkbox.bad:checked ~ .checkbox.bad:checked ~ .checkbox.bad:checked ~ .hangman .hangman-part-3 {
+  display: block; }
+
+.checkbox.bad:checked ~ .checkbox.bad:checked ~ .checkbox.bad:checked ~ .checkbox.bad:checked ~ .hangman .hangman-part-4 {
+  display: block; }
+
+.checkbox.bad:checked ~ .checkbox.bad:checked ~ .checkbox.bad:checked ~ .checkbox.bad:checked ~ .checkbox.bad:checked ~ .hangman .hangman-part-5 {
+  display: block; }
+
+.checkbox.bad:checked ~ .checkbox.bad:checked ~ .checkbox.bad:checked ~ .checkbox.bad:checked ~ .checkbox.bad:checked ~ .checkbox.bad:checked ~ .keyboard .label {
+  pointer-events: none; }
+
+.checkbox.bad:checked ~ .checkbox.bad:checked ~ .checkbox.bad:checked ~ .checkbox.bad:checked ~ .checkbox.bad:checked ~ .checkbox.bad:checked ~ .hangman .hangman-part-6 {
+  display: block; }
+
+.checkbox.bad:checked ~ .checkbox.bad:checked ~ .checkbox.bad:checked ~ .checkbox.bad:checked ~ .checkbox.bad:checked ~ .checkbox.bad:checked ~ .modal {
+  display: block; }
+
+.modal {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: none; }
