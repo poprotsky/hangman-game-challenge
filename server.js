@@ -36,9 +36,9 @@ app.use(express.static(WORKSPACE));
 
 app.get('/favicon.ico', (req, res) => res.status(204).send());
 
-app.get('/', (req, res) => {
+app.get('/single', (req, res) => {
   const wordList = shuffle(wordsArray.slice(0));
-  const numberOfWords = Math.min(parseInt(process.env.NUM_WORDS), wordList.length);
+  const numberOfWords = 1;
 
   let DATA = { alphabet, numberOfWords };
   let lessVars, scssVars;
@@ -58,7 +58,32 @@ app.get('/', (req, res) => {
   fs.writeFileSync(`${WORKSPACE}/_vars.less`, lessVars);
   fs.writeFileSync(`${WORKSPACE}/_vars.scss`, scssVars);
 
-  res.render(numberOfWords > 1 ? 'multi' : 'one', DATA);
+  res.render('one', DATA);
+});
+
+app.get('/multi', (req, res) => {
+  const wordList = shuffle(wordsArray.slice(0));
+  const numberOfWords = 5;
+  
+  let DATA = { alphabet, numberOfWords };
+  let lessVars, scssVars;
+
+  if (numberOfWords > 1) {
+    lessVars = prepare(DATA, prepareForLess) + '\n';
+    scssVars = prepare(DATA, prepareForScss) + '\n';
+    const words = DATA.words = wordList.splice(0, numberOfWords).map(getWordStats);
+    lessVars += words.map((data, index) => prepare(data, prepareForLess, index + 1)).join('\n');
+    scssVars += words.map((data, index) => prepare(data, prepareForScss, index + 1)).join('\n');
+  } else {
+    DATA = Object.assign(DATA, getWordStats(wordList[0]));
+    lessVars = prepare(DATA, prepareForLess);
+    scssVars = prepare(DATA, prepareForScss);
+  }
+
+  fs.writeFileSync(`${WORKSPACE}/_vars.less`, lessVars);
+  fs.writeFileSync(`${WORKSPACE}/_vars.scss`, scssVars);
+
+  res.render('multi', DATA);
 });
 
 

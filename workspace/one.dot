@@ -16,6 +16,7 @@
       .checkbox.letter-{{=letter}}:checked ~ * .label.label-{{=letter}} {
         pointer-events: none;
       }
+
     {{~}}
 
     {{~it.lettersNotInWord :letter}}
@@ -29,6 +30,22 @@
         pointer-events: none;
       }
     {{~}}
+
+    /* complete word - show modal */
+    {{~it.lettersInWord :letter:letterIndex}}
+      .checkbox.good.letter-{{=letter}}:checked {{?letterIndex < it.numberOfLettersInWord - 1}}+{{??}} ~ .modal{{?}}
+    {{~}}
+    {
+      display: block;
+    }
+
+    /* disabled click on keyboard labels if word is done */
+    {{~it.lettersInWord :letter:letterIndex}}
+      .checkbox.good.letter-{{=letter}}:checked {{?letterIndex < it.numberOfLettersInWord - 1}}+{{??}} ~ .keyboard .label {{?}}
+    {{~}}
+    {
+      pointer-events: none;
+    }
   </style>
   <link rel="stylesheet" href="./styles-less.css"/>
   <link rel="stylesheet" href="./styles-scss.css"/>
@@ -38,9 +55,8 @@
   <!-- hidden checkboxes - good letters -->
   {{~it.lettersInWord :letter:letterIndex}}
     <input type="checkbox" id="letter-{{=letter}}" class="checkbox letter-{{=letter}} {{?it.lettersInWord.includes(letter)}}good{{??}}bad{{?}}">
-    <span>{{=letter}}</span>
+    <!-- <span>{{=letter}}</span> -->
   {{~}}
-
 
   <br><br><br>
   <!-- WORD -->

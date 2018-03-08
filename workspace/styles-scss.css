@@ -1,103 +1,6 @@
-@charset "UTF-8";
 h1 span.scss {
   display: inline;
   color: green; }
-
-.letter-B {
-  font-weight: bold; }
-
-.letter-C {
-  font-weight: bold; }
-
-.letter-E {
-  font-weight: bold; }
-
-.letter-N {
-  font-weight: bold; }
-
-.letter-R {
-  font-weight: bold; }
-
-.letter-S {
-  font-weight: bold; }
-
-.letter-Y {
-  font-weight: bold; }
-
-.letter-Z {
-  font-weight: bold; }
-
-.letter-A {
-  font-style: italic; }
-
-.letter-Ą {
-  font-style: italic; }
-
-.letter-Ć {
-  font-style: italic; }
-
-.letter-D {
-  font-style: italic; }
-
-.letter-Ę {
-  font-style: italic; }
-
-.letter-F {
-  font-style: italic; }
-
-.letter-G {
-  font-style: italic; }
-
-.letter-H {
-  font-style: italic; }
-
-.letter-I {
-  font-style: italic; }
-
-.letter-J {
-  font-style: italic; }
-
-.letter-K {
-  font-style: italic; }
-
-.letter-L {
-  font-style: italic; }
-
-.letter-Ł {
-  font-style: italic; }
-
-.letter-M {
-  font-style: italic; }
-
-.letter-Ń {
-  font-style: italic; }
-
-.letter-O {
-  font-style: italic; }
-
-.letter-Ó {
-  font-style: italic; }
-
-.letter-P {
-  font-style: italic; }
-
-.letter-Ś {
-  font-style: italic; }
-
-.letter-T {
-  font-style: italic; }
-
-.letter-U {
-  font-style: italic; }
-
-.letter-W {
-  font-style: italic; }
-
-.letter-Ź {
-  font-style: italic; }
-
-.letter-Ż {
-  font-style: italic; }
 
 h1 span {
   display: none; }
@@ -134,17 +37,17 @@ h1 span {
 .checkbox.bad:checked ~ .checkbox.bad:checked ~ .checkbox.bad:checked ~ .checkbox.bad:checked ~ .checkbox.bad:checked ~ .hangman .hangman-part-5 {
   display: block; }
 
-.checkbox.bad:checked ~ .checkbox.bad:checked ~ .checkbox.bad:checked ~ .checkbox.bad:checked ~ .checkbox.bad:checked ~ .checkbox.bad:checked ~ .keyboard .label {
-  pointer-events: none; }
-
 .checkbox.bad:checked ~ .checkbox.bad:checked ~ .checkbox.bad:checked ~ .checkbox.bad:checked ~ .checkbox.bad:checked ~ .checkbox.bad:checked ~ .hangman .hangman-part-6 {
   display: block; }
+
+.checkbox.bad:checked ~ .checkbox.bad:checked ~ .checkbox.bad:checked ~ .checkbox.bad:checked ~ .checkbox.bad:checked ~ .checkbox.bad:checked ~ .keyboard .label {
+  pointer-events: none; }
 
 .checkbox.bad:checked ~ .checkbox.bad:checked ~ .checkbox.bad:checked ~ .checkbox.bad:checked ~ .checkbox.bad:checked ~ .checkbox.bad:checked ~ .modal {
   display: block; }
 
 .modal {
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   display: none; }

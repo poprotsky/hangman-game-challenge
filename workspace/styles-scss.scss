@@ -13,17 +13,17 @@ h1 {
   }
 }
 
-@each $letter in $lettersInWord {
-  .letter-#{$letter} {
-    font-weight: bold;
-  }
-}
-
-@each $letter in $lettersNotInWord {
-  .letter-#{$letter} {
-    font-style: italic;
-  }
-}
+// @each $letter in $lettersInWord {
+//   .letter-#{$letter} {
+//     font-weight: bold;
+//   }
+// }
+//
+// @each $letter in $lettersNotInWord {
+//   .letter-#{$letter} {
+//     font-style: italic;
+//   }
+// }
 
 // CUSTOM
 
@@ -97,7 +97,7 @@ h1 span { display: none; }
 }
 
 .modal {
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   display: none;

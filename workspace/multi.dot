@@ -5,50 +5,188 @@
   <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <title>Hangman challenge</title>
+  <style>
+  {{~it.words :data:index}}
+    {{~data.lettersInWord :letter:letterIndex}}
+      .letter-{{=letter}}-{{=data.word}} { color: green; }
+
+      .checkbox.letter-{{=letter}}-{{=data.word}}:checked ~ .letter.letter-{{=letter}}-{{=data.word}} {
+        opacity: 1;
+      }
+
+      .checkbox.letter-{{=letter}}-{{=data.word}}:checked ~ * .label.label-{{=letter}}-{{=data.word}} {
+        pointer-events: none;
+      }
+
+    {{~}}
+
+    {{~data.lettersNotInWord :letter:letterIndex}}
+      .letter-{{=letter}}-{{=data.word}} { color: red; }
+
+      .checkbox.letter-{{=letter}}-{{=data.word}}:checked ~ .letter.letter-{{=letter}}-{{=data.word}} {
+        opacity: 1;
+      }
+
+      .checkbox.letter-{{=letter}}-{{=data.word}}:checked ~ * .label.label-{{=letter}}-{{=data.word}} {
+        pointer-events: none;
+      }
+    {{~}}
+
+    /* complete word - show modal */
+    {{~data.lettersInWord :letter:letterIndex}}
+      .checkbox.good.letter-{{=letter}}-{{=data.word}}:checked {{?letterIndex < data.numberOfLettersInWord - 1}}+{{??}} ~ .modal{{?}}
+    {{~}}
+    {
+      display: block;
+    }
+
+    /* disabled click on keyboard labels if word is done */
+    {{~data.lettersInWord :letter:letterIndex}}
+      .checkbox.good.letter-{{=letter}}-{{=data.word}}:checked {{?letterIndex < data.numberOfLettersInWord - 1}}+{{??}} ~ .keyboard .label {{?}}
+    {{~}}
+    {
+      pointer-events: none;
+    }
+  {{~}}
+
+  body {
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+  }
+  .game {
+    display: -webkit-flex;
+    display: -ms-flex;
+    display: flex;
+    flex-flow: row nowrap;
+    width: 500vw;
+  }
+  .game__item {
+    flex: 0 0 100vw;
+    width: 100vw;
+    height: 100vh;
+  }
+  .game__item:first-child {
+    background-color: #fff;
+    position: relative;
+    z-index: 1;
+  }
+  .game__item:nth-child(2) {
+    background-color: yellow;
+    position: relative;
+    z-index: 2;
+  }
+  .game__item:nth-child(3) {
+    background-color: red;
+    position: relative;
+    z-index: 3;
+  }
+  .game__item:nth-child(4) {
+    background-color: orange;
+    position: relative;
+    z-index: 4;
+  }
+  .game__item:nth-child(5) {
+    background-color: violet;
+    position: relative;
+    z-index: 5;
+  }
+
+  </style>
+  <link rel="stylesheet" href="./styles-less.css"/>
+  <link rel="stylesheet" href="./styles-scss.css"/>
 </head>
 <body>
-  <div>
-    <p>Alphabet:
-      {{~it.alphabet :letter:letterIndex}}
-      <span class="letter-{{=letter}}">{{=letter}}</span>
-      {{~}}
-    </p>
 
-    <p>Number of words: {{=it.numWords}}</p>
-
-    <p>Words:</p>
-    <ul>
-    {{~it.words :data:index}}
-      <li>
-        <p>Word {{=index+1}} <span>{{=data.word}}</span><p>
-        <p>Number of letters: {{=data.numberOfLetters}}</p>
-        <p>Letter by letter in word:
-        {{~data.word :letter:letterIndex}}
-          <span>{{=letter}}{{?letterIndex < data.numberOfLetters - 1}},{{?}} </span>
-        {{~}}
-        </p>
-        <p>Number of unique letters used in word: {{=data.numberOfLettersInWord}}</p>
-        <p>Unique letters used in word:
+  <div class="game">
+  {{~it.words :data:index}}
+    <div id="word-{{=index + 1}}" class="game__item">
+      <p>Word {{=index+1}} <span>{{=data.word}}</span></p>
+        <br><br><br>
+        <!-- hidden checkboxes - good letters -->
         {{~data.lettersInWord :letter:letterIndex}}
-          <span>{{=letter}}{{?letterIndex < data.numberOfLettersInWord - 1}},{{?}} </span>
+          <input type="checkbox" id="letter-{{=letter}}-{{=data.word}}" class="checkbox letter-{{=letter}}-{{=data.word}} {{?data.lettersInWord.includes(letter)}}good{{??}}bad{{?}}">
+          <!-- <span>{{=letter}}</span> -->
         {{~}}
-        </p>
-        <p>Number of letters not used in word: {{=data.numberOfLettersNotInWord}}</p>
-        <p>Letters not used in word:
+
+        <br><br><br>
+        <!-- WORD -->
+        <h2>Word</h2>
+        {{~data.word :letter:letterIndex}}
+            <span class="letter letter-{{=letter}}-{{=data.word}}">{{=letter}}</span>
+        {{~}}
+
+
+
+        <br><br><br>
+        <!-- hidden checkboxes - bad letters -->
+        <h2>Not used letters</h2>
         {{~data.lettersNotInWord :letter:letterIndex}}
-          <span>{{=letter}}{{?letterIndex < data.numberOfLettersNotInWord - 1}},{{?}}</span>
+          <input type="checkbox" id="letter-{{=letter}}-{{=data.word}}" class="checkbox letter-{{=letter}}-{{=data.word}} {{?data.lettersInWord.includes(letter)}}good{{??}}bad{{?}}">
+          <span>{{=letter}}</span>
         {{~}}
-        </p>
-      </li>
-    {{~}}
-    </ul>
+
+        <br><br><br>
+        <!-- hangman -->
+        <h2>Hangman</h2>
+        <div class="hangman">
+          <span class="hangman-part-1">
+            <span>1</span>
+          </span>
+          <span class="hangman-part-2">
+            <span>2</span>
+          </span>
+          <span class="hangman-part-3">
+            <span>3</span>
+          </span>
+          <span class="hangman-part-4">
+            <span>4</span>
+          </span>
+          <span class="hangman-part-5">
+            <span>5</span>
+          </span>
+          <span class="hangman-part-6">
+            <span>6</span>
+          </span>
+        </div>
+
+      <h2>Keyboard</h2>
+      <div class="keyboard">
+        {{~it.alphabet :letter:letterIndex}}
+          <label for="letter-{{=letter}}-{{=data.word}}" class="label label-{{=letter}}-{{=data.word}} {{?data.lettersInWord.includes(letter)}}good{{??}}bad{{?}}">{{=letter}}</label>
+        {{~}}
+      </div>
+
+      <div class="modal">
+        <p>Modal test</p>
+        <a href="./">restart</a>
+        {{?index < 4}}
+          <a href="#word-{{=index + 2}}">next</a>
+        {{?}}
+      </div>
+
+      <br><br><br>
+      <p>Number of letters: {{=data.numberOfLetters}}</p>
+      <p>Letter by letter in word:
+      {{~data.word :letter:letterIndex}}
+        <span>{{=letter}}{{?letterIndex < data.numberOfLetters - 1}},{{?}} </span>
+      {{~}}
+      </p>
+      <p>Number of unique letters used in word: {{=data.numberOfLettersInWord}}</p>
+      <p>Unique letters used in word:
+      {{~data.lettersInWord :letter:letterIndex}}
+        <span>{{=letter}}{{?letterIndex < data.numberOfLettersInWord - 1}},{{?}} </span>
+      {{~}}
+      </p>
+      <p>Number of letters not used in word: {{=data.numberOfLettersNotInWord}}</p>
+      <p>Letters not used in word:
+      {{~data.lettersNotInWord :letter:letterIndex}}
+        <span>{{=letter}}{{?letterIndex < data.numberOfLettersNotInWord - 1}},{{?}}</span>
+      {{~}}
+      </p>
+    </div>
+  {{~}}
   </div>
-  <div>
-  <p>{{=it.words[0].word}}</p>
-  <p>{{=it.words[1].word}}</p>
-  <p>{{=it.words[2].word}}</p>
-  <p>{{=it.words[3].word}}</p>
-  <p>{{=it.words[4].word}}</p>
-  </div>
+
 </body>
 </html>
