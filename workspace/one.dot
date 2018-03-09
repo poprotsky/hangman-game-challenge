@@ -33,7 +33,7 @@
 
     /* complete word - show modal */
     {{~it.lettersInWord :letter:letterIndex}}
-      .checkbox.good.letter-{{=letter}}:checked {{?letterIndex < it.numberOfLettersInWord - 1}}+{{??}} ~ .modal{{?}}
+      .checkbox.good.letter-{{=letter}}:checked {{?letterIndex < it.numberOfLettersInWord - 1}}+{{??}} ~ .modal--win{{?}}
     {{~}}
     {
       display: block;
@@ -51,113 +51,82 @@
   <link rel="stylesheet" href="./styles-scss.css"/>
 </head>
 <body>
-  <h2>Used letters</h2>
-  <!-- hidden checkboxes - good letters -->
-  {{~it.lettersInWord :letter:letterIndex}}
-    <input type="checkbox" id="letter-{{=letter}}" class="checkbox letter-{{=letter}} {{?it.lettersInWord.includes(letter)}}good{{??}}bad{{?}}">
-    <!-- <span>{{=letter}}</span> -->
-  {{~}}
-
-  <br><br><br>
-  <!-- WORD -->
-  <h2>Word</h2>
-  {{~it.word :letter:letterIndex}}
-      <span class="letter letter-{{=letter}}">{{=letter}}</span>
-  {{~}}
-
-
-
-  <br><br><br>
-  <!-- hidden checkboxes - bad letters -->
-  <h2>Not used letters</h2>
-  {{~it.lettersNotInWord :letter:letterIndex}}
-    <input type="checkbox" id="letter-{{=letter}}" class="checkbox letter-{{=letter}} {{?it.lettersInWord.includes(letter)}}good{{??}}bad{{?}}">
-    <span>{{=letter}}</span>
-  {{~}}
-
-  <br><br><br>
-  <!-- hangman -->
-  <h2>Hangman</h2>
-  <div class="hangman">
-    <span class="hangman-part-1">
-      <span>1</span>
-    </span>
-    <span class="hangman-part-2">
-      <span>2</span>
-    </span>
-    <span class="hangman-part-3">
-      <span>3</span>
-    </span>
-    <span class="hangman-part-4">
-      <span>4</span>
-    </span>
-    <span class="hangman-part-5">
-      <span>5</span>
-    </span>
-    <span class="hangman-part-6">
-      <span>6</span>
-    </span>
-  </div>
-
-
-
-
-  <br><br><br>
-  <!-- keyboard -->
-  <h2>Keyboard</h2>
-  <div class="keyboard">
-    {{~it.alphabet :letter:letterIndex}}
-      <label for="letter-{{=letter}}" class="label label-{{=letter}} {{?it.lettersInWord.includes(letter)}}good{{??}}bad{{?}}">{{=letter}}</label>
-    {{~}}
-  </div>
-
-  <br>
-  <br>
-  <br>
-  <br>
-
-  <div class="modal">
-    <p>Modal test</p>
-    <a href="./">restart</a>
-  </div>
-
-  <div>
-    <h1>
-      <span class="less">LESS is working</span><br/>
-      <span class="scss">SCSS is working</span><br/>
-    </h1>
-    <p>Alphabet:
-      {{~it.alphabet :letter:letterIndex}}
-      <span class="letter-{{=letter}}">{{=letter}}</span>
+  <div class="game">
+    <div class="game__item">
+      <h2>Used letters</h2>
+      <!-- hidden checkboxes - good letters -->
+      {{~it.lettersInWord :letter:letterIndex}}
+        <input type="checkbox" id="letter-{{=letter}}" class="checkbox letter-{{=letter}} {{?it.lettersInWord.includes(letter)}}good{{??}}bad{{?}}">
+        <!-- <span>{{=letter}}</span> -->
       {{~}}
-    </p>
-    <p>Alphabet:
-      {{~it.alphabet :letter:letterIndex}}
-      <span class="{{?it.lettersInWord.includes(letter)}}good{{??}}bad{{?}}">{{=letter}}</span>
+
+      <br><br><br>
+      <!-- WORD -->
+      <h2>Word</h2>
+      {{~it.word :letter:letterIndex}}
+          <span class="letter letter-{{=letter}}">{{=letter}}</span>
       {{~}}
-    </p>
 
-    <p>Number of words: {{=it.numWords}}</p>
 
-    <p>Word <span>{{=it.word}}</span><p>
-    <p>Number of letters: {{=it.numberOfLetters}}</p>
-    <p>Letter by letter in word:
-    {{~it.word :letter:letterIndex}}
-      <span>{{=letter}}{{?letterIndex < it.numberOfLetters - 1}},{{?}} </span>
-    {{~}}
-    </p>
-    <p>Number of unique letters used in word: {{=it.numberOfLettersInWord}}</p>
-    <p>Unique letters used in word:
-    {{~it.lettersInWord :letter:letterIndex}}
-      <span>{{=letter}}{{?letterIndex < it.numberOfLettersInWord - 1}},{{?}} </span>
-    {{~}}
-    </p>
-    <p>Number of letters not used in word: {{=it.numberOfLettersNotInWord}}</p>
-    <p>Letters not used in word:
-    {{~it.lettersNotInWord :letter:letterIndex}}
-      <span>{{=letter}}{{?letterIndex < it.numberOfLettersNotInWord - 1}},{{?}}</span>
-    {{~}}
-    </p>
+
+      <br><br><br>
+      <!-- hidden checkboxes - bad letters -->
+      <h2>Not used letters</h2>
+      {{~it.lettersNotInWord :letter:letterIndex}}
+        <input type="checkbox" id="letter-{{=letter}}" class="checkbox letter-{{=letter}} {{?it.lettersInWord.includes(letter)}}good{{??}}bad{{?}}">
+        <span>{{=letter}}</span>
+      {{~}}
+
+      <br><br><br>
+      <!-- hangman -->
+      <h2>Hangman</h2>
+      <div class="hangman">
+        <span class="hangman-part-1">
+          <span>1</span>
+        </span>
+        <span class="hangman-part-2">
+          <span>2</span>
+        </span>
+        <span class="hangman-part-3">
+          <span>3</span>
+        </span>
+        <span class="hangman-part-4">
+          <span>4</span>
+        </span>
+        <span class="hangman-part-5">
+          <span>5</span>
+        </span>
+        <span class="hangman-part-6">
+          <span>6</span>
+        </span>
+      </div>
+
+
+
+
+      <br><br><br>
+      <!-- keyboard -->
+      <h2>Keyboard</h2>
+      <div class="keyboard">
+        {{~it.alphabet :letter:letterIndex}}
+          <label for="letter-{{=letter}}" class="label label-{{=letter}} {{?it.lettersInWord.includes(letter)}}good{{??}}bad{{?}}">{{=letter}}</label>
+        {{~}}
+      </div>
+
+      <!-- modals -->
+      <div class="modal modal--lose">
+        <p>Modal lose</p>
+        <a href="./single">Restart game</a>
+        <a href="./">Go home</a>
+      </div>
+
+      <div class="modal modal--win">
+        <p>Modal win</p>
+        <a href="./single">Restart game</a>
+        <a href="./">Go home</a>
+      </div>
+
+    </div>
   </div>
 </body>
 </html>

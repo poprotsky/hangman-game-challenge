@@ -34,7 +34,7 @@
 
     /* complete word - show modal */
     {{~data.lettersInWord :letter:letterIndex}}
-      .checkbox.good.letter-{{=letter}}-{{=data.word}}:checked {{?letterIndex < data.numberOfLettersInWord - 1}}+{{??}} ~ .modal{{?}}
+      .checkbox.good.letter-{{=letter}}-{{=data.word}}:checked {{?letterIndex < data.numberOfLettersInWord - 1}}+{{??}} ~ .modal--win{{?}}
     {{~}}
     {
       display: block;
@@ -48,49 +48,6 @@
       pointer-events: none;
     }
   {{~}}
-
-  body {
-    padding: 0;
-    margin: 0;
-    overflow: hidden;
-  }
-  .game {
-    display: -webkit-flex;
-    display: -ms-flex;
-    display: flex;
-    flex-flow: row nowrap;
-    width: 500vw;
-  }
-  .game__item {
-    flex: 0 0 100vw;
-    width: 100vw;
-    height: 100vh;
-  }
-  .game__item:first-child {
-    background-color: #fff;
-    position: relative;
-    z-index: 1;
-  }
-  .game__item:nth-child(2) {
-    background-color: yellow;
-    position: relative;
-    z-index: 2;
-  }
-  .game__item:nth-child(3) {
-    background-color: red;
-    position: relative;
-    z-index: 3;
-  }
-  .game__item:nth-child(4) {
-    background-color: orange;
-    position: relative;
-    z-index: 4;
-  }
-  .game__item:nth-child(5) {
-    background-color: violet;
-    position: relative;
-    z-index: 5;
-  }
 
   </style>
   <link rel="stylesheet" href="./styles-less.css"/>
@@ -157,33 +114,24 @@
         {{~}}
       </div>
 
-      <div class="modal">
-        <p>Modal test</p>
-        <a href="./">restart</a>
-        {{?index < 4}}
-          <a href="#word-{{=index + 2}}">next</a>
-        {{?}}
+      <!-- modals -->
+      <div class="modal modal--lose">
+        <p>Modal lose</p>
+        <a href="./multi">Restart game</a>
+        <a href="./">Go home</a>
       </div>
 
-      <br><br><br>
-      <p>Number of letters: {{=data.numberOfLetters}}</p>
-      <p>Letter by letter in word:
-      {{~data.word :letter:letterIndex}}
-        <span>{{=letter}}{{?letterIndex < data.numberOfLetters - 1}},{{?}} </span>
-      {{~}}
-      </p>
-      <p>Number of unique letters used in word: {{=data.numberOfLettersInWord}}</p>
-      <p>Unique letters used in word:
-      {{~data.lettersInWord :letter:letterIndex}}
-        <span>{{=letter}}{{?letterIndex < data.numberOfLettersInWord - 1}},{{?}} </span>
-      {{~}}
-      </p>
-      <p>Number of letters not used in word: {{=data.numberOfLettersNotInWord}}</p>
-      <p>Letters not used in word:
-      {{~data.lettersNotInWord :letter:letterIndex}}
-        <span>{{=letter}}{{?letterIndex < data.numberOfLettersNotInWord - 1}},{{?}}</span>
-      {{~}}
-      </p>
+      <div class="modal modal--win">
+        <p>Modal win</p>
+        {{?index < 4}}
+          <a href="#word-{{=index + 2}}">Next word</a>
+          {{??}}
+          <p>You win all multi game</p>
+        {{?}}
+        <a href="./multi">Restart game</a>
+        <a href="./">Go home</a>
+      </div>
+      
     </div>
   {{~}}
   </div>

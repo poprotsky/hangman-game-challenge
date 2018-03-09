@@ -86,7 +86,7 @@ h1 span { display: none; }
                 pointer-events: none;
               }
             }
-            ~ .modal {
+            ~ .modal--lose {
               display: block;
             }
           }
@@ -101,4 +101,47 @@ h1 span { display: none; }
   top: 0;
   right: 0;
   display: none;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+.game {
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  flex-flow: row nowrap;
+  width: 500vw;
+}
+.game__item {
+  flex: 0 0 100vw;
+  width: 100vw;
+  height: 100vh;
+}
+.game__item:first-child {
+  background-color: #fff;
+  position: relative;
+  z-index: 1;
+}
+.game__item:nth-child(2) {
+  background-color: yellow;
+  position: relative;
+  z-index: 2;
+}
+.game__item:nth-child(3) {
+  background-color: red;
+  position: relative;
+  z-index: 3;
+}
+.game__item:nth-child(4) {
+  background-color: orange;
+  position: relative;
+  z-index: 4;
+}
+.game__item:nth-child(5) {
+  background-color: violet;
+  position: relative;
+  z-index: 5;
 }
