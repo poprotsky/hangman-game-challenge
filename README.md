@@ -2,11 +2,9 @@
 
 Install node.js: https://nodejs.org/en/
 
-Fork repo on github page
+Clone repo
 
-Clone repo (replace gmichlicki-neducatio with your username)
-
-    git clone git@github.com:gmichlicki-neducatio/hangman-challenge.git
+    git clone https://github.com/epoprocki-neducatio/hangman-challenge.git
 
 Install dependencies
   
