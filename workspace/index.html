@@ -4,10 +4,113 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>Hangman | OnlyCSS</title>
+  <link rel="icon" type="image/png" href="assets/hangman-favicon.png" sizes="32x32">
+  <link rel="stylesheet" href="./styles-less.css"/>
+  <link rel="stylesheet" href="./styles-scss.css"/>
 </head>
-<body>
-  <a href="/single">single</a>
-  <a href="/multi">multi</a>
+<body class="homepage">
+  <div class="game game--single">
+    <div class="game__item">
+  
+      <!-- logo -->
+      <img src="assets/logo.svg" alt="" class="logo">
+
+      <!-- actions -->
+      <div class="actions">
+        <a href="./single" class="actions__item">Single word</a>
+        <a href="./multi" class="actions__item">Multi words</a>
+      </div>
+
+      <!-- hangman -->
+      <div class="hangman">
+        <div class="hangman__bg">
+          <img src="assets/hangman-bg.svg" alt="">
+        </div>
+        <span class="hangman-part-1">
+          <img src="assets/hangman-part-1.svg" alt="">
+        </span>
+        <span class="hangman-part-2">
+          <img src="assets/hangman-part-2.svg" alt="">
+        </span>
+        <span class="hangman-part-3">
+          <img src="assets/hangman-part-3.svg" alt="">
+        </span>
+        <span class="hangman-part-4">
+          <img src="assets/hangman-part-4.svg" alt="">
+        </span>
+        <span class="hangman-part-5">
+          <img src="assets/hangman-part-5.svg" alt="">
+        </span>
+        <span class="hangman-part-6">
+          <img src="assets/hangman-part-6.svg" alt="">
+        </span>
+      </div>
+
+      <!-- clouds -->
+      <div class="clouds">
+        <div class="clouds__item">
+          <img src="assets/cloud-1.svg" alt="">
+        </div>
+        <div class="clouds__item">
+          <img src="assets/cloud-2.svg" alt="">
+        </div>
+        <div class="clouds__item">
+          <img src="assets/cloud-3.svg" alt="">
+        </div>
+        <div class="clouds__item">
+          <img src="assets/cloud-4.svg" alt="">
+        </div>
+        <div class="clouds__item">
+          <img src="assets/cloud-5.svg" alt="">
+        </div>
+        <div class="clouds__item">
+          <img src="assets/cloud-6.svg" alt="">
+        </div>
+      </div>
+
+      <!-- trees -->
+      <div class="trees">
+        <div class="trees__item">
+          <img src="assets/tree-1.svg" alt="">
+        </div>
+        <div class="trees__item">
+          <img src="assets/tree-2.svg" alt="">
+        </div>
+        <div class="trees__item">
+          <img src="assets/tree-3.svg" alt="">
+        </div>
+        <div class="trees__item">
+          <img src="assets/tree-4.svg" alt="">
+        </div>
+        <div class="trees__item">
+          <img src="assets/tree-2.svg" alt="">
+        </div>
+      </div>
+
+      <!-- buildings -->
+      <div class="buildings">
+        <div class="buildings-bg">
+          <img src="assets/buildings-bg.svg" alt="">
+        </div>
+        <div class="buildings-item buildings-item--left">
+          <img src="assets/buildings-left.svg" alt="">
+        </div>
+        <div class="buildings-item buildings-item--right">
+          <img src="assets/buildings-right.svg" alt="">
+        </div>
+      </div>
+
+      <!-- bg -->
+      <div class="game__item-bottom-bg">
+        <img src="assets/bottom-bg-alt.svg" alt="">
+      </div>
+
+      <!-- footer -->
+      <footer class="footer">
+        <a href="https://github.com/epoprocki-neducatio/hangman-challenge" target="_blank">View source in GitHub</a>
+      </footer>
+    </div>
+  </div>
 </body>
 </html>

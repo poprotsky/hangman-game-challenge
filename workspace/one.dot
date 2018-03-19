@@ -4,30 +4,29 @@
   <meta charset="UTF-8">
   <meta name="viewport"
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Coiny&amp;subset=latin-ext" rel="stylesheet">
+  <link rel="icon" type="image/png" href="assets/hangman-favicon.png" sizes="32x32">
   <title>Hangman challenge</title>
   <style>
     {{~it.lettersInWord :letter}}
-      .letter-{{=letter}} { color: green; }
-
-      .checkbox.letter-{{=letter}}:checked ~ .letter.letter-{{=letter}} {
+      .checkbox.letter-{{=letter}}:checked ~ * .letter.letter-{{=letter}} > span {
         opacity: 1;
       }
 
       .checkbox.letter-{{=letter}}:checked ~ * .label.label-{{=letter}} {
         pointer-events: none;
+        opacity: .5;
+        transform: scale(.9);
+        transition: all .3s ease;
       }
-
     {{~}}
 
     {{~it.lettersNotInWord :letter}}
-      .letter-{{=letter}} { color: red; }
-
-      .checkbox.letter-{{=letter}}:checked ~ .letter.letter-{{=letter}} {
-        opacity: 1;
-      }
-
       .checkbox.letter-{{=letter}}:checked ~ * .label.label-{{=letter}} {
         pointer-events: none;
+        opacity: .5;
+        transform: scale(.9);
+        transition: all .3s ease;
       }
     {{~}}
 
@@ -36,7 +35,17 @@
       .checkbox.good.letter-{{=letter}}:checked {{?letterIndex < it.numberOfLettersInWord - 1}}+{{??}} ~ .modal--win{{?}}
     {{~}}
     {
-      display: block;
+      visibility: visible;
+      opacity: 1;
+      z-index: 9;
+      transform: scale(1);
+    }
+
+    {{~it.lettersInWord :letter:letterIndex}}
+      .checkbox.good.letter-{{=letter}}:checked {{?letterIndex < it.numberOfLettersInWord - 1}}+{{??}} ~ .modal--win .modal__title {{?}}
+    {{~}}
+    {
+      animation: tracking-in-expand 0.7s ease-in-out both;
     }
 
     /* disabled click on keyboard labels if word is done */
@@ -51,79 +60,144 @@
   <link rel="stylesheet" href="./styles-scss.css"/>
 </head>
 <body>
-  <div class="game">
+  <div class="game game--single">
     <div class="game__item">
-      <h2>Used letters</h2>
-      <!-- hidden checkboxes - good letters -->
+      <!-- hidden content -->
       {{~it.lettersInWord :letter:letterIndex}}
-        <input type="checkbox" id="letter-{{=letter}}" class="checkbox letter-{{=letter}} {{?it.lettersInWord.includes(letter)}}good{{??}}bad{{?}}">
-        <!-- <span>{{=letter}}</span> -->
+        <input type="checkbox" id="letter-{{=letter}}" class="used-letters-hidden checkbox letter-{{=letter}} {{?it.lettersInWord.includes(letter)}}good{{??}}bad{{?}}">
       {{~}}
 
-      <br><br><br>
-      <!-- WORD -->
-      <h2>Word</h2>
-      {{~it.word :letter:letterIndex}}
-          <span class="letter letter-{{=letter}}">{{=letter}}</span>
-      {{~}}
-
-
-
-      <br><br><br>
-      <!-- hidden checkboxes - bad letters -->
-      <h2>Not used letters</h2>
       {{~it.lettersNotInWord :letter:letterIndex}}
-        <input type="checkbox" id="letter-{{=letter}}" class="checkbox letter-{{=letter}} {{?it.lettersInWord.includes(letter)}}good{{??}}bad{{?}}">
-        <span>{{=letter}}</span>
+        <input type="checkbox" id="letter-{{=letter}}" class="not-used-letters-hidden checkbox letter-{{=letter}} {{?it.lettersInWord.includes(letter)}}good{{??}}bad{{?}}">
       {{~}}
+      <!-- END hidden content -->
 
-      <br><br><br>
+      <!-- actions -->
+      <div class="actions">
+        <a href="./" class="actions__item"><img src="assets/arrow-icon.svg" alt=""></a>
+        <a href="./single" class="actions__item"><img src="assets/restart-icon.svg" alt=""></a>
+      </div>
+    
+      <!-- word -->
+      <div class="word">
+        {{~it.word :letter:letterIndex}}
+            <span class="letter letter-{{=letter}}"><span>{{=letter}}</span></span>
+        {{~}}
+      </div>
+
       <!-- hangman -->
-      <h2>Hangman</h2>
       <div class="hangman">
+        <div class="hangman__bg">
+          <img src="assets/hangman-bg.svg" alt="">
+        </div>
         <span class="hangman-part-1">
-          <span>1</span>
+          <img src="assets/hangman-part-1.svg" alt="">
         </span>
         <span class="hangman-part-2">
-          <span>2</span>
+          <img src="assets/hangman-part-2.svg" alt="">
         </span>
         <span class="hangman-part-3">
-          <span>3</span>
+          <img src="assets/hangman-part-3.svg" alt="">
         </span>
         <span class="hangman-part-4">
-          <span>4</span>
+          <img src="assets/hangman-part-4.svg" alt="">
         </span>
         <span class="hangman-part-5">
-          <span>5</span>
+          <img src="assets/hangman-part-5.svg" alt="">
         </span>
         <span class="hangman-part-6">
-          <span>6</span>
+          <img src="assets/hangman-part-6.svg" alt="">
         </span>
       </div>
 
 
-
-
-      <br><br><br>
       <!-- keyboard -->
-      <h2>Keyboard</h2>
       <div class="keyboard">
         {{~it.alphabet :letter:letterIndex}}
           <label for="letter-{{=letter}}" class="label label-{{=letter}} {{?it.lettersInWord.includes(letter)}}good{{??}}bad{{?}}">{{=letter}}</label>
         {{~}}
       </div>
 
+      <!-- clouds -->
+      <div class="clouds">
+        <div class="clouds__item">
+          <img src="assets/cloud-1.svg" alt="">
+        </div>
+        <div class="clouds__item">
+          <img src="assets/cloud-2.svg" alt="">
+        </div>
+        <div class="clouds__item">
+          <img src="assets/cloud-3.svg" alt="">
+        </div>
+        <div class="clouds__item">
+          <img src="assets/cloud-4.svg" alt="">
+        </div>
+        <div class="clouds__item">
+          <img src="assets/cloud-5.svg" alt="">
+        </div>
+        <div class="clouds__item">
+          <img src="assets/cloud-6.svg" alt="">
+        </div>
+      </div>
+
+      <!-- trees -->
+      <div class="trees">
+        <div class="trees__item">
+          <img src="assets/tree-1.svg" alt="">
+        </div>
+        <div class="trees__item">
+          <img src="assets/tree-2.svg" alt="">
+        </div>
+        <div class="trees__item">
+          <img src="assets/tree-3.svg" alt="">
+        </div>
+        <div class="trees__item">
+          <img src="assets/tree-4.svg" alt="">
+        </div>
+        <div class="trees__item">
+          <img src="assets/tree-2.svg" alt="">
+        </div>
+      </div>
+
+      <!-- buildings -->
+      <div class="buildings">
+        <div class="buildings-bg">
+          <img src="assets/buildings-bg.svg" alt="">
+        </div>
+        <div class="buildings-item buildings-item--left">
+          <img src="assets/buildings-left.svg" alt="">
+        </div>
+        <div class="buildings-item buildings-item--right">
+          <img src="assets/buildings-right.svg" alt="">
+        </div>
+      </div>
+
+      <!-- bg -->
+      <div class="game__item-bottom-bg">
+        <img src="assets/bottom-bg-alt.svg" alt="">
+      </div>
+
       <!-- modals -->
       <div class="modal modal--lose">
-        <p>Modal lose</p>
-        <a href="./single">Restart game</a>
-        <a href="./">Go home</a>
+        <div class="modal__inner">
+          <h2 class="modal__title">You LOSE</h2>
+          <p class="modal__desc">Bad job, man!</p>
+          <div class="modal__actions">
+            <a href="./single" class="modal__actions-item">Restart game</a>
+            <a href="./" class="modal__actions-item">Go home</a>
+          </div>
+        </div>
       </div>
 
       <div class="modal modal--win">
-        <p>Modal win</p>
-        <a href="./single">Restart game</a>
-        <a href="./">Go home</a>
+        <div class="modal__inner">
+          <h2 class="modal__title">You WIN</h2>
+          <p class="modal__desc">Good job, man!</p>
+          <div class="modal__actions">
+            <a href="./single" class="modal__actions-item">Restart game</a>
+            <a href="./" class="modal__actions-item">Go home</a>
+          </div>
+        </div>
       </div>
 
     </div>
