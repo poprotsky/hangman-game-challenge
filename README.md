@@ -1,3 +1,12 @@
+# Hangman game challenge
+
+![alt text](http://poprotsky.eu/github/hangman/preview.jpg)
+
+> The game is written in pure css, without using the javaScript. To create templates used technology dot.js. The game works with completely disabled javaScript in the browser.
+
+
+
+
 # Installation
 
 Install node.js: https://nodejs.org/en/
