@@ -13,7 +13,7 @@ Install node.js: https://nodejs.org/en/
 
 Clone repo
 
-    git clone https://github.com/epoprocki-neducatio/hangman-challenge.git
+    git clone https://github.com/poprotsky/hangman-game-challenge.git
 
 Install dependencies
   
