@@ -4,7 +4,7 @@
 
 > The game is written in pure css, without using the javaScript. To create templates used technology dot.js. The game works with completely disabled javaScript in the browser.
 
-
+## [Play game / View demo](https://lab.n-educatio.pl/eugene/)
 
 
 # Installation
