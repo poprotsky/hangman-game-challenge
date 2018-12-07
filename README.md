@@ -4,6 +4,10 @@
 
 > The game is written in pure css, without using the javaScript. To create templates used technology dot.js. The game works with completely disabled javaScript in the browser.
 
+> All graphics in the game were created from scratch in the vector. 
+
+> All animations were created by keyframes in css3. All styles were written by scss preprocessor.
+
 ## [Play game / View demo](https://lab.n-educatio.pl/eugene/)
 
 
